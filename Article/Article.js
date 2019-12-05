@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'ipsum',
+    date: 'Dec 4, 2019',
+    firstParagraph: 'more ipsum',
+    secondParagraph: 'even more ipsum',
+    thirdParagraph: 'and even more ipsum'
   }
 ];
 
@@ -112,3 +119,77 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+// elements
+function articleCreator(data){
+  const divA = document.createElement('div');
+  const headA = document.createElement('h2');
+  const date = document.createElement('p');
+  const paraOne= document.createElement('p');
+  const paraTwo = document.createElement('p');
+  const paraThree = document.createElement('p');
+  const spanA = document.createElement('span');
+
+  // classes
+  divA.classList.add('article');
+  date.classList.add('date');
+  spanA.classList.add('expandButton')
+
+  // append child
+  // divA.append(headA, date, paraOne, paraTwo, paraThree, spanA)
+
+  divA.appendChild(headA);
+  divA.appendChild(date);
+  divA.appendChild(paraOne);
+  divA.appendChild(paraTwo);
+  divA.appendChild(paraThree);
+  divA.appendChild(spanA);
+
+// text content
+headA.textContent = data.title;
+date.textContent = data.date;
+paraOne.textContent = data.firstParagraph;
+paraTwo.textContent = data.secondParagraph;
+paraThree.textContent = data.thirdParagraph;
+spanA.textContent = 'Expand'
+
+  // event listener
+  spanA.addEventListener('click', () => {
+    divA.classList.toggle('article-open');
+    if(spanA.textContent !== 'Expand'){
+      spanA.textContent = 'Expand'
+    }
+    else {
+      spanA.textContent = 'Close'
+    };
+    if(spanA.textContent === 'Close'){
+      spanA.addEventListener('click', () => {
+        article.style.display = 'none';
+      })
+    }
+  });
+
+  return divA;
+
+}
+data.map(function(currentValue) {
+  let newArticle = articleCreator(currentValue);
+  document.querySelector('.articles').appendChild(newArticle)
+});
+
+console.log(articleCreator({
+  title: 'Professional Software Development in 2019',
+  date: 'Jan 1st, 2019',
+  firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+        hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+        Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+  secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+        hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+        hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+        hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+  thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+        Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+        Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+}))
